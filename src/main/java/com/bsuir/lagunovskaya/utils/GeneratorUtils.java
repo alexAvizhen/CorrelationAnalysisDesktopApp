@@ -14,6 +14,9 @@ public class GeneratorUtils {
         if (GeneratorTypes.GENERATOR_2.equals(generationType)) {
             return new RandomGenerator();
         }
+        if (GeneratorTypes.GENERATOR_9.equals(generationType)) {
+            return new AnalogSignalsGenerator();
+        }
 
 
         return new SimpleGenerator();

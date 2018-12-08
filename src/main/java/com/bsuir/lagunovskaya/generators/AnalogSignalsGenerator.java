@@ -3,9 +3,7 @@ package com.bsuir.lagunovskaya.generators;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by alav0217 on 12/5/2018.
- */
+
 public class AnalogSignalsGenerator extends AbstractGenerator {
     @Override
     public List<Double> generate(int amountOfSignals) {

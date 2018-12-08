@@ -14,9 +14,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-/**
- * Created by Александр on 12.03.2017.
- */
 public class MyFrame extends JFrame {
 
     private String[] generationTypes = {
@@ -27,7 +24,8 @@ public class MyFrame extends JFrame {
             GeneratorTypes.GENERATOR_5,
             GeneratorTypes.GENERATOR_6,
             GeneratorTypes.GENERATOR_7,
-            GeneratorTypes.GENERATOR_8
+            GeneratorTypes.GENERATOR_8,
+            GeneratorTypes.GENERATOR_9
     };
     private Integer[] amountOfGeneratedSignals = {
             50,
@@ -41,7 +39,7 @@ public class MyFrame extends JFrame {
 
     public MyFrame(String title) throws HeadlessException {
         super(title);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// что делать после нажатия крестика
         setSize(1400, 700);
         JPanel toolPanel = new JPanel(new FlowLayout()); // верхняя панель инструментов для выпадающих списков и тп
         JLabel selectGenerationTypeLabelFirstArr = new JLabel("Generation type for 1st arrays: "); // кусок текста
@@ -75,13 +73,14 @@ public class MyFrame extends JFrame {
         JPanel eastPanel = new JPanel(new FlowLayout());
         add(BorderLayout.EAST, eastPanel);
 
-
+        //чтобы стать слушателем кнопки необходимо релазиовать класс ActionListener и добавить экзмепляр этой реализации в слушатели
+        //кнопки ( в данном случае это сделано через анонимные классы)
         generateBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                firstArrayListModel.clear();//перед заполнением, чистим списки, которые отоброжают массивы
+                firstArrayListModel.clear();//перед заполнением, чистим модели списков(базы данных списков), которые отображают массивы
                 secondArrayListModel.clear();
-                //берём значения с выпадающих списов (модель - это как база данных для айного компонента)
+                //берём значения с выпадающих списов (модель - это как база данных для данного компонента)
                 Integer amountOfGeneratedSignals = (Integer) selectAmountOfGeneratedSignalComboBox.getModel().getSelectedItem();// берём значение сы выпадающего списка для выбора кол-ва элементов для генерации
                 String firstArrayGenerationType = (String) selectGenerationTypeFirstArrayComboBox.getModel().getSelectedItem();// берём значение с выпадающего спиская для определения типа  генерации массива 1
                 String secondArrayGenerationType = (String) selectGenerationTypeSecondArrayComboBox.getModel().getSelectedItem();// берём значение с выпадающего спиская для определения типа  генерации массива 2
@@ -92,12 +91,12 @@ public class MyFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 //заполняем первый массив по данным из первого листа с числами
-                ArrayList<Double> firstArray = new ArrayList<>();
+                List<Double> firstArray = new ArrayList<>();
                 for (int i = 0; i < firstArrayListModel.getSize(); i++) {
                     firstArray.add(firstArrayListModel.getElementAt(i));
                 }
                 //заполняем второй массив по данным из второго листа с числами
-                ArrayList<Double> secondArray = new ArrayList<>();
+                List<Double> secondArray = new ArrayList<>();
                 for (int i = 0; i < secondArrayListModel.getSize(); i++) {
                     secondArray.add(secondArrayListModel.getElementAt(i));
                 }
@@ -130,13 +129,13 @@ public class MyFrame extends JFrame {
 
         List<Double> firstArrayGeneratedValues = firstArrayGenerator.generate(amountOfGeneratedSignals); // генерируем с помощью подсунотого генератора, переданное кол-во сигналов
         //заполняем модель(как база данных) для списка, отображающего элементы первого массива
-        for (Double firstArrayGeneratedValue : firstArrayGeneratedValues) {
-            firstArrayListModel.addElement(firstArrayGeneratedValue);
+        for (int i = 0; i < firstArrayGeneratedValues.size(); i++) {
+            firstArrayListModel.addElement(firstArrayGeneratedValues.get(i));
         }
         // тоже самое делаем для второго массива(определяем генератор по типу, генерируем значения и заполняем модель для второго отображающего списка)
         List<Double> secondArrayGeneratedValues = secondArrayGenerator.generate(amountOfGeneratedSignals);
-        for (Double secondArrayGeneratedValue : secondArrayGeneratedValues) {
-            secondArrayListModel.addElement(secondArrayGeneratedValue);
+        for (int i = 0; i < secondArrayGeneratedValues.size(); i++) {
+            secondArrayListModel.addElement(secondArrayGeneratedValues.get(i));
         }
     }
 }
