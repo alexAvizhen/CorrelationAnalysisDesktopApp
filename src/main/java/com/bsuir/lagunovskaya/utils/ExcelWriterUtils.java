@@ -14,10 +14,18 @@ import java.nio.channels.FileChannel;
 import java.util.List;
 
 public class ExcelWriterUtils {
+    private static String SASHA_PREFIX_PATH = "C:\\Projects\\LagunovskayaCourseProject\\src\\main\\resources\\";
+    private static String SASHA_TEMPLATE_EXCEL_FILE = "C:\\Projects\\LagunovskayaCourseProject\\src\\main\\resources\\template.xlsx";
+    private static String SASHA_TEMP_TEMPLATE_EXCEL_FILE = "C:\\Projects\\LagunovskayaCourseProject\\src\\main\\resources\\temp_template.xlsx";
+
+    private static String LIZA_PREFIX_PATH = "E:\\УНИВЕР\\JavaProjects\\CorrelationAnalysisDesktopApp\\src\\main\\resources\\";
+    private static String LIZA_TEMPLATE_EXCEL_FILE = "E:\\УНИВЕР\\JavaProjects\\CorrelationAnalysisDesktopApp\\src\\main\\resources\\template.xlsx";
+    private static String LIZA_TEMP_TEMPLATE_EXCEL_FILE = "E:\\УНИВЕР\\JavaProjects\\CorrelationAnalysisDesktopApp\\src\\main\\resources\\temp_template.xlsx";
+
     //необходимо подменить под свой компьютер
-    private static String PREFIX_PATH = "C:\\Projects\\LagunovskayaCourseProject\\src\\main\\resources\\";
-    private static String TEMPLATE_EXCEL_FILE = "C:\\Projects\\LagunovskayaCourseProject\\src\\main\\resources\\template.xlsx";
-    private static String TEMP_TEMPLATE_EXCEL_FILE = "C:\\Projects\\LagunovskayaCourseProject\\src\\main\\resources\\temp_template.xlsx";
+    private static String PREFIX_PATH = LIZA_PREFIX_PATH;
+    private static String TEMPLATE_EXCEL_FILE = LIZA_TEMPLATE_EXCEL_FILE;
+    private static String TEMP_TEMPLATE_EXCEL_FILE = LIZA_TEMP_TEMPLATE_EXCEL_FILE;
 
     public static String writeToExcelFile(String writeFileName, List<Double> firstArray, List<Double> secondArray) {
 
