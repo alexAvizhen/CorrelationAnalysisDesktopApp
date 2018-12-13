@@ -3,16 +3,20 @@ package com.bsuir.lagunovskaya.generators;
 import java.util.ArrayList;
 import java.util.List;
 
+public class AperiodicSignalsGenerator extends AbstractGenerator {
 
-public class AnalogSignalsGenerator extends AbstractGenerator {
+    private Double a = 0.15;
+    private Double b = 0.17;
+
     @Override
     public List<Double> generate(int amountOfSignals) {
         ArrayList<Double> resultList = new ArrayList<>();
         for (int i = 0; i < amountOfSignals; i++) {
             double t = i + 1;
-            double power = -1.0 * Math.pow(t - 4.0, 2.0) / 2.8;
-            double y_t = 4.8 * Math.pow(Math.E, power);
-            resultList.add(y_t);
+            double power1 = -t * a;
+            double power2 = -t * b;
+            double s_t = 200.0 * (Math.pow(Math.E, power1) - Math.pow(Math.E, power2));
+            resultList.add(s_t);
         }
 
         return resultList;

@@ -22,10 +22,7 @@ public class MyFrame extends JFrame {
             GeneratorTypes.GENERATOR_3,
             GeneratorTypes.GENERATOR_4,
             GeneratorTypes.GENERATOR_5,
-            GeneratorTypes.GENERATOR_6,
-            GeneratorTypes.GENERATOR_7,
-            GeneratorTypes.GENERATOR_8,
-            GeneratorTypes.GENERATOR_9
+            GeneratorTypes.GENERATOR_6
     };
     private Integer[] amountOfGeneratedSignals = {
             50,
@@ -39,8 +36,8 @@ public class MyFrame extends JFrame {
 
     public MyFrame(String title) throws HeadlessException {
         super(title);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// что делать после нажатия крестика
-        setSize(1400, 700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1100, 600);
         JPanel toolPanel = new JPanel(new FlowLayout()); // верхняя панель инструментов для выпадающих списков и тп
         JLabel selectGenerationTypeLabelFirstArr = new JLabel("Generation type for 1st arrays: "); // кусок текста
         toolPanel.add(selectGenerationTypeLabelFirstArr); // добавляем лейбел на выделенную панель инструментов
@@ -54,33 +51,32 @@ public class MyFrame extends JFrame {
         toolPanel.add(selectAmountOfGeneratedSignalsLabel);
         final JComboBox<Integer> selectAmountOfGeneratedSignalComboBox = new JComboBox<>(amountOfGeneratedSignals);
         toolPanel.add(selectAmountOfGeneratedSignalComboBox);
-        JButton generateBtn = new JButton("Generate signals");
-        toolPanel.add(generateBtn);
         add(BorderLayout.NORTH, toolPanel);
 
         JPanel westPanel = new JPanel(new FlowLayout());
-        JList firstArrayList = new JList(firstArrayListModel);// создаём список для отображения сигналов для первого массива
-        westPanel.add(new JScrollPane(firstArrayList));
         add(BorderLayout.WEST, westPanel);
 
-        JPanel centerPanel = new JPanel(new FlowLayout());
+        JPanel centerPanel = new JPanel(new GridLayout(1, 2));//сеточно расположение 1 строка 2 столбца
+        JList firstArrayList = new JList(firstArrayListModel);// создаём список для отображения сигналов для первого массива
         final JList secondArrayList = new JList(secondArrayListModel);// создаём список для отображения сигналов для второго массива
+        centerPanel.add(new JScrollPane(firstArrayList));
         centerPanel.add(new JScrollPane(secondArrayList));
-        JButton saveToExcelBtn = new JButton("Save to excel");
-        centerPanel.add(saveToExcelBtn);
         add(BorderLayout.CENTER, centerPanel);
 
         JPanel eastPanel = new JPanel(new FlowLayout());
+        JButton generateBtn = new JButton("Generate signals");
+        eastPanel.add(generateBtn);
+        JButton saveToExcelBtn = new JButton("Save to excel");
+        eastPanel.add(saveToExcelBtn);
         add(BorderLayout.EAST, eastPanel);
 
-        //чтобы стать слушателем кнопки необходимо релазиовать класс ActionListener и добавить экзмепляр этой реализации в слушатели
-        //кнопки ( в данном случае это сделано через анонимные классы)
+
         generateBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                firstArrayListModel.clear();//перед заполнением, чистим модели списков(базы данных списков), которые отображают массивы
+                firstArrayListModel.clear();//перед заполнением, чистим списки, которые отоброжают массивы
                 secondArrayListModel.clear();
-                //берём значения с выпадающих списов (модель - это как база данных для данного компонента)
+                //берём значения с выпадающих списов (модель - это как база данных для айного компонента)
                 Integer amountOfGeneratedSignals = (Integer) selectAmountOfGeneratedSignalComboBox.getModel().getSelectedItem();// берём значение сы выпадающего списка для выбора кол-ва элементов для генерации
                 String firstArrayGenerationType = (String) selectGenerationTypeFirstArrayComboBox.getModel().getSelectedItem();// берём значение с выпадающего спиская для определения типа  генерации массива 1
                 String secondArrayGenerationType = (String) selectGenerationTypeSecondArrayComboBox.getModel().getSelectedItem();// берём значение с выпадающего спиская для определения типа  генерации массива 2
@@ -91,12 +87,12 @@ public class MyFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 //заполняем первый массив по данным из первого листа с числами
-                List<Double> firstArray = new ArrayList<>();
+                ArrayList<Double> firstArray = new ArrayList<>();
                 for (int i = 0; i < firstArrayListModel.getSize(); i++) {
                     firstArray.add(firstArrayListModel.getElementAt(i));
                 }
                 //заполняем второй массив по данным из второго листа с числами
-                List<Double> secondArray = new ArrayList<>();
+                ArrayList<Double> secondArray = new ArrayList<>();
                 for (int i = 0; i < secondArrayListModel.getSize(); i++) {
                     secondArray.add(secondArrayListModel.getElementAt(i));
                 }
@@ -129,13 +125,13 @@ public class MyFrame extends JFrame {
 
         List<Double> firstArrayGeneratedValues = firstArrayGenerator.generate(amountOfGeneratedSignals); // генерируем с помощью подсунотого генератора, переданное кол-во сигналов
         //заполняем модель(как база данных) для списка, отображающего элементы первого массива
-        for (int i = 0; i < firstArrayGeneratedValues.size(); i++) {
-            firstArrayListModel.addElement(firstArrayGeneratedValues.get(i));
+        for (Double firstArrayGeneratedValue : firstArrayGeneratedValues) {
+            firstArrayListModel.addElement(firstArrayGeneratedValue);
         }
         // тоже самое делаем для второго массива(определяем генератор по типу, генерируем значения и заполняем модель для второго отображающего списка)
         List<Double> secondArrayGeneratedValues = secondArrayGenerator.generate(amountOfGeneratedSignals);
-        for (int i = 0; i < secondArrayGeneratedValues.size(); i++) {
-            secondArrayListModel.addElement(secondArrayGeneratedValues.get(i));
+        for (Double secondArrayGeneratedValue : secondArrayGeneratedValues) {
+            secondArrayListModel.addElement(secondArrayGeneratedValue);
         }
     }
 }
