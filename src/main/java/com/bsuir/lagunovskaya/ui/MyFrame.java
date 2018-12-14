@@ -54,7 +54,7 @@ public class MyFrame extends JFrame {
         toolPanel.add(selectGenerationTypeLabelSecondArr);// добавляем созданный лейбел на панель инструментов
         final JComboBox<String> selectGenerationTypeSecondArrayComboBox = new JComboBox<>(generationTypes);// создаём выпадающий спиоок для выбора типа генерации для массив 2
         toolPanel.add(selectGenerationTypeSecondArrayComboBox);// добавляем выпадающий список на панель инструментов
-        JLabel selectAmountOfGeneratedSignalsLabel = new JLabel("Кол-во сигналов");
+        JLabel selectAmountOfGeneratedSignalsLabel = new JLabel("Кол-во элементов");
         toolPanel.add(selectAmountOfGeneratedSignalsLabel);
         final JComboBox<Integer> selectAmountOfGeneratedSignalComboBox = new JComboBox<>(amountOfGeneratedSignals);
         toolPanel.add(selectAmountOfGeneratedSignalComboBox);
@@ -80,14 +80,14 @@ public class MyFrame extends JFrame {
         buttonsPanel.add(saveToExcelBtn);
         eastPanel.add(buttonsPanel);
         JPanel scalePanel = new JPanel(new FlowLayout());
-        JLabel vertScaleFirstArrLabel = new JLabel("Вертикальное масштабирование 1го массива");
+        JLabel vertScaleFirstArrLabel = new JLabel("Вертикальное масштабирование 1-го массива");
         scalePanel.add(vertScaleFirstArrLabel);
         final JComboBox<Double> verticalScaleFirstArrComboBox = new JComboBox<>(verticalScales);
         verticalScaleFirstArrComboBox.setSelectedIndex(1);//тобы по умолчанию был 1-ый жлемент массива verticalScales, то есть 1.0
         scalePanel.add(verticalScaleFirstArrComboBox);
         eastPanel.add(scalePanel);
         scalePanel = new JPanel(new FlowLayout());
-        JLabel vertScaleSecondArrLabel = new JLabel("Вертикальное масштабирование 2го массива");
+        JLabel vertScaleSecondArrLabel = new JLabel("Вертикальное масштабирование 2-го массива");
         scalePanel.add(vertScaleSecondArrLabel);
         final JComboBox<Double> verticalScaleSecondArrComboBox = new JComboBox<>(verticalScales);
         verticalScaleSecondArrComboBox.setSelectedIndex(1);//тобы по умолчанию был 1-ый жлемент массива verticalScales, то есть 1.0
