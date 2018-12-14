@@ -2,6 +2,7 @@ package com.bsuir.lagunovskaya.utils;
 
 import com.bsuir.lagunovskaya.generators.AbstractGenerator;
 import com.bsuir.lagunovskaya.generators.AperiodicSignalsGenerator;
+import com.bsuir.lagunovskaya.generators.GaussianDistributedGenerator;
 import com.bsuir.lagunovskaya.generators.HarmonicSignalsGenerator;
 import com.bsuir.lagunovskaya.generators.HarmonicSignalsWithCasualStartPhaseGenerator;
 import com.bsuir.lagunovskaya.generators.PolyHarmonicSignalsGenerator;
@@ -26,7 +27,9 @@ public class GeneratorUtils {
         if (GeneratorTypes.GENERATOR_5.equals(generationType)) {
             return new UniformlyDistributedSignalsGenerator();
         }
-
+        if (GeneratorTypes.GENERATOR_6.equals(generationType)) {
+            return new GaussianDistributedGenerator();
+        }
 
         return new SimpleGenerator();
     }

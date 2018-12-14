@@ -30,6 +30,13 @@ public class MyFrame extends JFrame {
             150
     };
 
+    private Double[] verticalScales = {
+            0.5,
+            1.0,
+            1.5,
+            2.0
+    };
+
     private DefaultListModel<Double> firstArrayListModel = new DefaultListModel<>();
     private DefaultListModel<Double> secondArrayListModel = new DefaultListModel<>();
 
@@ -63,11 +70,29 @@ public class MyFrame extends JFrame {
         centerPanel.add(new JScrollPane(secondArrayList));
         add(BorderLayout.CENTER, centerPanel);
 
-        JPanel eastPanel = new JPanel(new FlowLayout());
+        JPanel eastPanel = new JPanel(new GridLayout(3, 1));// расположение элементов в панеле сеточное, 3 строки, 1 столбец
+        JPanel buttonsPanel = new JPanel(new FlowLayout());
         JButton generateBtn = new JButton("Сгенерировать сигналы");
-        eastPanel.add(generateBtn);
+        buttonsPanel.add(generateBtn);
+        JButton scaleBtn = new JButton("Масштабировать");
+        buttonsPanel.add(scaleBtn);
         JButton saveToExcelBtn = new JButton("Сохранить в Excel");
-        eastPanel.add(saveToExcelBtn);
+        buttonsPanel.add(saveToExcelBtn);
+        eastPanel.add(buttonsPanel);
+        JPanel scalePanel = new JPanel(new FlowLayout());
+        JLabel vertScaleFirstArrLabel = new JLabel("Вертикальное масштабирование 1го массива");
+        scalePanel.add(vertScaleFirstArrLabel);
+        final JComboBox<Double> verticalScaleFirstArrComboBox = new JComboBox<>(verticalScales);
+        verticalScaleFirstArrComboBox.setSelectedIndex(1);//тобы по умолчанию был 1-ый жлемент массива verticalScales, то есть 1.0
+        scalePanel.add(verticalScaleFirstArrComboBox);
+        eastPanel.add(scalePanel);
+        scalePanel = new JPanel(new FlowLayout());
+        JLabel vertScaleSecondArrLabel = new JLabel("Вертикальное масштабирование 2го массива");
+        scalePanel.add(vertScaleSecondArrLabel);
+        final JComboBox<Double> verticalScaleSecondArrComboBox = new JComboBox<>(verticalScales);
+        verticalScaleSecondArrComboBox.setSelectedIndex(1);//тобы по умолчанию был 1-ый жлемент массива verticalScales, то есть 1.0
+        scalePanel.add(verticalScaleSecondArrComboBox);
+        eastPanel.add(scalePanel);
         add(BorderLayout.EAST, eastPanel);
 
 
@@ -110,7 +135,20 @@ public class MyFrame extends JFrame {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
 
+        scaleBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                double scaleSizeOfFirstArr = (double) verticalScaleFirstArrComboBox.getModel().getSelectedItem();//получаем коефф верт масштабирования для первого массива
+                double scaleSizeOfSecondArr = (double) verticalScaleSecondArrComboBox.getModel().getSelectedItem();//получаем коефф верт масштабирования для 2го массива
+                for (int i = 0; i < firstArrayListModel.getSize(); i++) {
+                    firstArrayListModel.set(i, firstArrayListModel.get(i) * scaleSizeOfFirstArr);//вставляем в iое место iый элемент умноженный на коэфф верт мастабирования
+                }
+                for (int i = 0; i < secondArrayListModel.getSize(); i++) {
+                    secondArrayListModel.set(i, secondArrayListModel.get(i) * scaleSizeOfSecondArr);
+                }
             }
         });
 
