@@ -4,7 +4,7 @@ import com.bsuir.lagunovskaya.ui.MyFrame;
 
 public class Main {
     public static void main(String[] args) {
-        new MyFrame("Lagunovskaya");
+        new MyFrame("Программа корреляционного анализа одномерных массивов данных");
 
     }
 }

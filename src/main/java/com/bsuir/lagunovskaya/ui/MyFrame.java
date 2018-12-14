@@ -37,17 +37,17 @@ public class MyFrame extends JFrame {
     public MyFrame(String title) throws HeadlessException {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1100, 600);
+        setSize(1300, 600);
         JPanel toolPanel = new JPanel(new FlowLayout()); // верхняя панель инструментов для выпадающих списков и тп
-        JLabel selectGenerationTypeLabelFirstArr = new JLabel("Generation type for 1st arrays: "); // кусок текста
+        JLabel selectGenerationTypeLabelFirstArr = new JLabel("Генератор для 1-го массива: "); // кусок текста
         toolPanel.add(selectGenerationTypeLabelFirstArr); // добавляем лейбел на выделенную панель инструментов
         final JComboBox<String> selectGenerationTypeFirstArrayComboBox = new JComboBox<>(generationTypes); // выпадающий список для выбора типа генерации для массива 1
         toolPanel.add(selectGenerationTypeFirstArrayComboBox);// добавляем выпадающий список на панель инструментов для массива один
-        JLabel selectGenerationTypeLabelSecondArr = new JLabel("Generation type for 2nd array: ");// лейбел для выбора типа генерации для массива 2
+        JLabel selectGenerationTypeLabelSecondArr = new JLabel("Генератор для 2-го массива: ");// лейбел для выбора типа генерации для массива 2
         toolPanel.add(selectGenerationTypeLabelSecondArr);// добавляем созданный лейбел на панель инструментов
         final JComboBox<String> selectGenerationTypeSecondArrayComboBox = new JComboBox<>(generationTypes);// создаём выпадающий спиоок для выбора типа генерации для массив 2
         toolPanel.add(selectGenerationTypeSecondArrayComboBox);// добавляем выпадающий список на панель инструментов
-        JLabel selectAmountOfGeneratedSignalsLabel = new JLabel("Amount of generated signals");
+        JLabel selectAmountOfGeneratedSignalsLabel = new JLabel("Кол-во сигналов");
         toolPanel.add(selectAmountOfGeneratedSignalsLabel);
         final JComboBox<Integer> selectAmountOfGeneratedSignalComboBox = new JComboBox<>(amountOfGeneratedSignals);
         toolPanel.add(selectAmountOfGeneratedSignalComboBox);
@@ -64,9 +64,9 @@ public class MyFrame extends JFrame {
         add(BorderLayout.CENTER, centerPanel);
 
         JPanel eastPanel = new JPanel(new FlowLayout());
-        JButton generateBtn = new JButton("Generate signals");
+        JButton generateBtn = new JButton("Сгенерировать сигналы");
         eastPanel.add(generateBtn);
-        JButton saveToExcelBtn = new JButton("Save to excel");
+        JButton saveToExcelBtn = new JButton("Сохранить в Excel");
         eastPanel.add(saveToExcelBtn);
         add(BorderLayout.EAST, eastPanel);
 
@@ -100,7 +100,7 @@ public class MyFrame extends JFrame {
                 String resultFilePath = ExcelWriterUtils.writeToExcelFile("result.xlsx", firstArray, secondArray);
                 //показываем диалог, чтобы открыть файл
                 int dialogButton = JOptionPane.YES_NO_OPTION;
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Data was successfully saved. Would you like to open created file?", "Open file", dialogButton);
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Информация была успешно сохранена. Хотите открыть созданный файл?", "Открыть файл", dialogButton);
                 //dialogResult == 0, если нажали 'Yes'
                 if (dialogResult == 0) {
                     try {
