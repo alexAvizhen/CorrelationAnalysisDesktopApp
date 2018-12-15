@@ -45,32 +45,32 @@ public class MyFrame extends JFrame {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1300, 600);
-        JPanel toolPanel = new JPanel(new FlowLayout()); // верхняя панель инструментов для выпадающих списков и тп
-        JLabel selectGenerationTypeLabelFirstArr = new JLabel("Генератор для 1-го массива: "); // кусок текста
-        toolPanel.add(selectGenerationTypeLabelFirstArr); // добавляем лейбел на выделенную панель инструментов
-        final JComboBox<String> selectGenerationTypeFirstArrayComboBox = new JComboBox<>(generationTypes); // выпадающий список для выбора типа генерации для массива 1
-        toolPanel.add(selectGenerationTypeFirstArrayComboBox);// добавляем выпадающий список на панель инструментов для массива один
-        JLabel selectGenerationTypeLabelSecondArr = new JLabel("Генератор для 2-го массива: ");// лейбел для выбора типа генерации для массива 2
-        toolPanel.add(selectGenerationTypeLabelSecondArr);// добавляем созданный лейбел на панель инструментов
-        final JComboBox<String> selectGenerationTypeSecondArrayComboBox = new JComboBox<>(generationTypes);// создаём выпадающий спиоок для выбора типа генерации для массив 2
-        toolPanel.add(selectGenerationTypeSecondArrayComboBox);// добавляем выпадающий список на панель инструментов
+        JPanel toolPanel = new JPanel(new FlowLayout()); //верхняя панель инструментов для выпадающих списков и тп
+        JLabel selectGenerationTypeLabelFirstArr = new JLabel("Генератор для 1-го массива: "); //кусок текста
+        toolPanel.add(selectGenerationTypeLabelFirstArr); //добавляем лейбл на выделенную панель инструментов
+        final JComboBox<String> selectGenerationTypeFirstArrayComboBox = new JComboBox<>(generationTypes); //выпадающий список для выбора типа генерации для массива 1
+        toolPanel.add(selectGenerationTypeFirstArrayComboBox);//добавляем выпадающий список на панель инструментов для массива один
+        JLabel selectGenerationTypeLabelSecondArr = new JLabel("Генератор для 2-го массива: ");//лейбл для выбора типа генерации для массива 2
+        toolPanel.add(selectGenerationTypeLabelSecondArr);//добавляем созданный лейбл на панель инструментов
+        final JComboBox<String> selectGenerationTypeSecondArrayComboBox = new JComboBox<>(generationTypes);//создаём выпадающий спиоок для выбора типа генерации для массив 2
+        toolPanel.add(selectGenerationTypeSecondArrayComboBox);//добавляем выпадающий список на панель инструментов
         JLabel selectAmountOfGeneratedSignalsLabel = new JLabel("Кол-во элементов");
         toolPanel.add(selectAmountOfGeneratedSignalsLabel);
         final JComboBox<Integer> selectAmountOfGeneratedSignalComboBox = new JComboBox<>(amountOfGeneratedSignals);
         toolPanel.add(selectAmountOfGeneratedSignalComboBox);
-        add(BorderLayout.NORTH, toolPanel);
+        add(BorderLayout.NORTH, toolPanel); //размещаем эту панель инструментов наверху
 
         JPanel westPanel = new JPanel(new FlowLayout());
-        add(BorderLayout.WEST, westPanel);
+        add(BorderLayout.WEST, westPanel); //западная часть окна пустая (грубо говоря)
 
-        JPanel centerPanel = new JPanel(new GridLayout(1, 2));//сеточно расположение 1 строка 2 столбца
-        JList firstArrayList = new JList(firstArrayListModel);// создаём список для отображения сигналов для первого массива
-        final JList secondArrayList = new JList(secondArrayListModel);// создаём список для отображения сигналов для второго массива
-        centerPanel.add(new JScrollPane(firstArrayList));
+        JPanel centerPanel = new JPanel(new GridLayout(1, 2));//сеточное расположение: 1 строка и 2 столбца
+        JList firstArrayList = new JList(firstArrayListModel);//создаём список для отображения элементов для первого массива
+        final JList secondArrayList = new JList(secondArrayListModel);//создаём список для отображения элементов для второго массива
+        centerPanel.add(new JScrollPane(firstArrayList)); //добавляем скроллы
         centerPanel.add(new JScrollPane(secondArrayList));
-        add(BorderLayout.CENTER, centerPanel);
+        add(BorderLayout.CENTER, centerPanel); //добавляем эти списки в центр окна
 
-        JPanel eastPanel = new JPanel(new GridLayout(3, 1));// расположение элементов в панеле сеточное, 3 строки, 1 столбец
+        JPanel eastPanel = new JPanel(new GridLayout(3, 1));//расположение элементов в панели сеточное: 3 строки, 1 столбец
         JPanel buttonsPanel = new JPanel(new FlowLayout());
         JButton generateBtn = new JButton("Сгенерировать сигналы");
         buttonsPanel.add(generateBtn);
@@ -83,29 +83,29 @@ public class MyFrame extends JFrame {
         JLabel vertScaleFirstArrLabel = new JLabel("Вертикальное масштабирование 1-го массива");
         scalePanel.add(vertScaleFirstArrLabel);
         final JComboBox<Double> verticalScaleFirstArrComboBox = new JComboBox<>(verticalScales);
-        verticalScaleFirstArrComboBox.setSelectedIndex(1);//тобы по умолчанию был 1-ый жлемент массива verticalScales, то есть 1.0
+        verticalScaleFirstArrComboBox.setSelectedIndex(1);//чтобы по умолчанию был 1-ый жлемент массива verticalScales, то есть 1.0
         scalePanel.add(verticalScaleFirstArrComboBox);
         eastPanel.add(scalePanel);
         scalePanel = new JPanel(new FlowLayout());
         JLabel vertScaleSecondArrLabel = new JLabel("Вертикальное масштабирование 2-го массива");
         scalePanel.add(vertScaleSecondArrLabel);
         final JComboBox<Double> verticalScaleSecondArrComboBox = new JComboBox<>(verticalScales);
-        verticalScaleSecondArrComboBox.setSelectedIndex(1);//тобы по умолчанию был 1-ый жлемент массива verticalScales, то есть 1.0
+        verticalScaleSecondArrComboBox.setSelectedIndex(1);//чтобы по умолчанию был 1-ый элемент массива verticalScales, то есть 1.0
         scalePanel.add(verticalScaleSecondArrComboBox);
         eastPanel.add(scalePanel);
-        add(BorderLayout.EAST, eastPanel);
+        add(BorderLayout.EAST, eastPanel); //добавляем всё выше созданное на восточную часть окна
 
 
-        generateBtn.addActionListener(new ActionListener() {
+        generateBtn.addActionListener(new ActionListener() { //используя шаблон наблюдателя, вызываем методы при нажатии на кнопку
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                firstArrayListModel.clear();//перед заполнением, чистим списки, которые отоброжают массивы
+                firstArrayListModel.clear();//перед заполнением, чистим списки, которые отоброжают массивы на случай если пользователь повторно нажмет эту кнопку, т.е. чтобы не накапливалось
                 secondArrayListModel.clear();
-                //берём значения с выпадающих списов (модель - это как база данных для айного компонента)
-                Integer amountOfGeneratedSignals = (Integer) selectAmountOfGeneratedSignalComboBox.getModel().getSelectedItem();// берём значение сы выпадающего списка для выбора кол-ва элементов для генерации
-                String firstArrayGenerationType = (String) selectGenerationTypeFirstArrayComboBox.getModel().getSelectedItem();// берём значение с выпадающего спиская для определения типа  генерации массива 1
-                String secondArrayGenerationType = (String) selectGenerationTypeSecondArrayComboBox.getModel().getSelectedItem();// берём значение с выпадающего спиская для определения типа  генерации массива 2
-                fillPresentationListModels(amountOfGeneratedSignals, firstArrayGenerationType,  secondArrayGenerationType);// вызываем метод, который заполнит списки, которые отоброжают массивы
+                //берём значения с выпадающих списков (модель - это как база данных для данного компонента)
+                Integer amountOfGeneratedSignals = (Integer) selectAmountOfGeneratedSignalComboBox.getModel().getSelectedItem();// берём значение с выпадающего списка для выбора кол-ва элементов для генерации
+                String firstArrayGenerationType = (String) selectGenerationTypeFirstArrayComboBox.getModel().getSelectedItem();// берём значение с выпадающего списка для определения типа генерации массива 1
+                String secondArrayGenerationType = (String) selectGenerationTypeSecondArrayComboBox.getModel().getSelectedItem();// берём значение с выпадающего списка для определения типа генерации массива 2
+                fillPresentationListModels(amountOfGeneratedSignals, firstArrayGenerationType,  secondArrayGenerationType);// вызываем метод, который заполнит списки, которые отображают массивы
             }
         });
         saveToExcelBtn.addActionListener(new ActionListener() {
@@ -141,10 +141,10 @@ public class MyFrame extends JFrame {
         scaleBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                double scaleSizeOfFirstArr = (double) verticalScaleFirstArrComboBox.getModel().getSelectedItem();//получаем коефф верт масштабирования для первого массива
+                double scaleSizeOfFirstArr = (double) verticalScaleFirstArrComboBox.getModel().getSelectedItem();//получаем коефф верт масштабирования для 1-го массива
                 double scaleSizeOfSecondArr = (double) verticalScaleSecondArrComboBox.getModel().getSelectedItem();//получаем коефф верт масштабирования для 2го массива
                 for (int i = 0; i < firstArrayListModel.getSize(); i++) {
-                    firstArrayListModel.set(i, firstArrayListModel.get(i) * scaleSizeOfFirstArr);//вставляем в iое место iый элемент умноженный на коэфф верт мастабирования
+                    firstArrayListModel.set(i, firstArrayListModel.get(i) * scaleSizeOfFirstArr);//вставляем в iое место iый элемент умноженный на коэфф верт масштабирования
                 }
                 for (int i = 0; i < secondArrayListModel.getSize(); i++) {
                     secondArrayListModel.set(i, secondArrayListModel.get(i) * scaleSizeOfSecondArr);
@@ -158,7 +158,7 @@ public class MyFrame extends JFrame {
     }
 
     private void fillPresentationListModels(Integer amountOfGeneratedSignals, String firstArrayGenerationType, String secondArrayGenerationType) {
-        AbstractGenerator firstArrayGenerator = GeneratorUtils.getGeneratorByGenerationType(firstArrayGenerationType);//получаем генератор через вызов йнукции для получения генератора по типу
+        AbstractGenerator firstArrayGenerator = GeneratorUtils.getGeneratorByGenerationType(firstArrayGenerationType);//получаем генератор через вызов функции для получения генератора по типу
         AbstractGenerator secondArrayGenerator = GeneratorUtils.getGeneratorByGenerationType(secondArrayGenerationType);//получаем генератор аналогично для массива 2
 
         List<Double> firstArrayGeneratedValues = firstArrayGenerator.generate(amountOfGeneratedSignals); // генерируем с помощью подсунотого генератора, переданное кол-во сигналов
